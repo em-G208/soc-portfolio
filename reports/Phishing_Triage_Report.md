@@ -4,11 +4,13 @@
 
 ## MANAGER SUMMARY
 
-- Credential phishing attempt detected via user-reported suspicious email.
+- **Alert:** Credential phishing attempt detected via user-reported suspicious email.
 
-- **Decision:** Escalate. Credential submission could not be confirmed; user interaction with a credential harvesting URL introduces potential credential or session exposure.
+- **Decision:** Escalate.
+  
+- **Reason:** User clicked the link; credential exposure unknown. Unknown + high-impact account (HR + possible SSO) = unacceptable false negative risk
 
-- **Actions:** Forced credential reset and session revocation initiated; monitoring active.
+- **Actions:** Containment applied. Compromise not confirmed. Monitoring active.
 
 - Triage completed in < 25 minutes.
 
@@ -16,11 +18,16 @@
 
 ## WHO
 
-- Michael B. from HR-01 reported a suspicious email. The sender identity is unknown; attribution is not possible at triage level.
+- Michael B. from HR-01 reported a suspicious email. 
+- The sender identity is unknown; attribution is not possible at triage level.
 
 ## WHAT
 
-- The email contained a spoofed sender header. Upon clicking the link, the user was redirected to a fake URL mimicking the company's login page. Michael B. clicked the link but it is uncertain whether credentials were submitted. Even without confirmed submission, session token exposure or browser auto-fill interaction cannot be ignored.
+- The email contained a spoofed sender header. 
+- Upon clicking the link, the user was redirected to a fake URL mimicking the company's login page. 
+- Michael B. clicked the link but it is uncertain whether credentials were submitted.
+- Even without confirmed submission, potential session or credential exposure cannot be ignored. 
+- This creates an unknown exposure state, not a confirmed compromise.
 
 ## WHEN
 
@@ -28,11 +35,17 @@
 
 ## WHERE
 
-- Michael B.'s work computer (Windows) is affected. Microsoft account and VPN access may be at risk pending credential verification. If SSO is in place, this exposure may extend beyond a single account, potentially allowing access to downstream SaaS systems and internal tools. Lateral movement is not observed at this stage.
+- Michael B.'s work computer (Windows) is affected. 
+- Microsoft account and VPN access are potentially exposed pending credential verification.  
+- Lateral movement is not observed at this stage.
 
 ## WHY
 
-- The purpose of this attack is harvesting credentials of the authorized personnel. HR personnel typically have broad access to sensitive systems and employee data, making them a primary target for credential theft.
+- Escalation is based on potential impact, not confirmed compromise. 
+- HR accounts typically have access to internal systems, employee data, and multiple SaaS platforms.
+- If SSO is enabled, a single credential compromise may spread across systems.
+- This increases the blast radius beyond a single account, justifying escalation even without confirmed credential submission.
+- Decision prioritizes false negative avoidance over false positive cost.
 
 ---
 
@@ -67,26 +80,24 @@
 4. Temporarily disable the affected account until verification is complete.
 
 ### Investigation:
-- Should check the email gateway logs to see if any other phishing email was sent to other users.
-- Should check auth logs for any successful or failed login attempts after the click timestamp; specifically look for impossible travel, new device registration, failed login burst, or MFA bypass attempts. 
-- Proxy and DNS logs should also be reviewed for access to the phishing domain.
-
+- Review email gateway logs for additional recipients.
+- Review authentication logs post-click (failed/success, new device, impossible travel, MFA anomalies)
+- Review proxy/DNS logs for phishing domain access
+  
 ### Prevention:
-- Must block all spoofed sender domains in the email gateway.
-- Must add the fake URL to threat intel feed
-- Must create a detection rule for similar patterns.
+- Block all spoofed sender domains in the email gateway.
+- Add the fake URL to threat intel feed
+- Create a detection rule for similar patterns.
 
 - - - 
   
 ## RISK DISCLOSURE
 
 ### Decision Boundary:
-* Spoofed header email with a fake credential harvesting URL was enough to escalate. 
-- Credential submission data was missing; therefore exposure was assumed and escalation was warranted.
+-  Unknown credential exposure combined with a credential harvesting URL was sufficient to escalate.
 
 ### Failure Modes:
-- This decision might be wrong if auth logs show no successful or failed login attempts after the click timestamp and email gateway confirms no other delivery. 
-- In that case, contain and close would be sufficient.
+- If no authentication activity is observed post-click and no additional recipients are identified, the incident may be downgraded to contained exposure.
 
 ### Escalation Trigger:
 - If any post-click authentication attempt is detected (successful or failed), the incident transitions from potential exposure to confirmed credential compromise. Any confirmed additional delivery to other users would further validate this decision.
