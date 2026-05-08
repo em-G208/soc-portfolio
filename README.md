@@ -1,10 +1,6 @@
 # SOC Analyst Portfolio
 
-SOC L1-focused triage analyst.
-
-I make low-noise escalation decisions under incomplete data and prioritize false negative risk over false positive cost.
-
-Available for remote night shift coverage (Istanbul -> US EST overlap).
+Reduces alert noise and escalates correctly. High-volume yes / no / unknown decisions under incomplete data. Remote. Night shift coverage (UTC+3 → US EST).
 
 ## Flagship: Phishing Triage Decision
 
