@@ -1,6 +1,6 @@
 # SOC Analyst Portfolio
 
-Reduces alert noise and escalates correctly. High-volume yes / no / unknown decisions under incomplete data. Remote. Night shift coverage (UTC+3 → US EST).
+Reduces alert noise through structured triage and escalation discipline. High-volume yes / no / unknown decisions under incomplete data. Remote. US overnight SOC coverage from UTC+3.
 
 ## Flagship: Phishing Triage Decision
 
