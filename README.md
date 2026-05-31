@@ -7,12 +7,12 @@ Focuses on alert triage, noise reduction, and operational consistency. Applies h
 
 ## 2. Operational Execution
 **Alert Triage Batch**
-* [Triage Batch Operations](https://github.com/em-G208/soc-portfolio/blob/main/reports/03_Triage_Batch.md)
+* [Triage Batch Operations](https://github.com/em-G208/soc-portfolio/blob/main/reports/Triage_Batch.md)
 * Processing of 10 standard security alerts.
 * Focuses on matching signals, testing basic hypotheses, and making clear close/monitor/escalate decisions.
 
 **Decision Logic**
-* [Decision Summary](https://github.com/em-G208/soc-portfolio/blob/main/reports/04_Decision_Summary.md)
+* [Decision Summary](https://github.com/em-G208/soc-portfolio/blob/main/reports/Decision_Summary.md)
 * The baseline operational rules used to identify false positives and trigger escalations.
 * Defines how missing data and unknown variables are handled without guessing.
 
