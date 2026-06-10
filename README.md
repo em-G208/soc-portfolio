@@ -1,6 +1,6 @@
 # SOC Analyst Portfolio
 
-Focuses on alert triage, noise reduction, and operational consistency. Applies high-volume yes/no/unknown decision-making principles to security alerts under incomplete data conditions. Remote. US overnight SOC operations coverage from UTC+3.
+Focuses on alert triage, noise reduction, and operational consistency. Applies high-volume yes/no/unknown decision-making principles to security alerts under incomplete data conditions. Remote. Full overlap with EU business hours; natural overlap with US overnight SOC operations across EST/CST/MST/PST windows.
 
 ## 1. Flagship Report
 * [Phishing Triage Decision](https://github.com/em-G208/soc-portfolio/blob/main/reports/Phishing_Triage_Report.md)
